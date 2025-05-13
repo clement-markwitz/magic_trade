@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('finish', 20);
             $table->integer('quantity')->default(1);
             $table->boolean('trade')->default(false);
-            $table->boolean('etat');
+            $table->string('etat');
             $table->date('acquired_date')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
