@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->foreign('user_id')->constrained()->onDelete('cascade');
+            $table->string('name',20);
+            $table->string('last_name',20);
+            $table->string('pseudo',20);
+            $table->string('contry');
+            $table->string('city');
+            $table->string('street')->nullable();
+            $table->string('postal_code');
+            $table->string('phone')->nullable();
+            $table->string('desciption')->nullable()->default(null);
             $table->timestamps();
         });
     }
