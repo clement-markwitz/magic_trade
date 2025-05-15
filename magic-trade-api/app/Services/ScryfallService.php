@@ -16,7 +16,7 @@ class ScryfallService
     {
         return Cache::remember("scryfall_card_{$scryfallId}",3600,function () use ($scryfallId) {
             try {
-                $response = Http::get("{$this->baseUrl}/cards/{$scryfallId}");
+                $response = Http::withoutVerifying()->get("{$this->baseUrl}/cards/{$scryfallId}");
                 
                 if ($response->successful()) {
                     return $response->json();
