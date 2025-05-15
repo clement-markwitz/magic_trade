@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('postal_code');
             $table->string('phone')->nullable();
-            $table->string('desciption')->nullable()->default(null);
+            $table->string('description')->nullable()->default(null);
             $table->timestamps();
         });
     }
