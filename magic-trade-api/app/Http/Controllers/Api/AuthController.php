@@ -21,7 +21,7 @@ class AuthController extends Controller
             'city'=>['required','string','max:100'],
             'street'=>['string','max:100'],
             'postal_code'=>['required','string','digits:5'],
-            'phone'=>['required','string','max:20'],
+            'phone'=>['string','max:20'],
             'description'=>['string','max:1000'],
         ],[
             'name'=>'le prénom est obligatoire',
@@ -31,7 +31,6 @@ class AuthController extends Controller
             'contry'=>'le pays est obligatoire',
             'city'=>'la ville est obligatoire',
             'postal_code'=>'le code postal est obligatoire',
-            'phone'=>'le tel est obligatoire',
             'description'=> 'description trop longue (1000 caractères) '
         ]);
         $request->validate([
@@ -59,9 +58,10 @@ class AuthController extends Controller
                 'password'=> Hash::make($request->password),
             ]);
             $client = Client::create([
-                'user_id'=>$user,
+                'user_id'=>$user->id,
                 'name'=>$request->name,
                 'last_name'=>$request->last_name,
+                'pseudo'=> $request->pseudo,
                 'email'=>$user->email,
                 'contry'=>$request->contry,
                 'city'=>$request->city,
@@ -71,6 +71,7 @@ class AuthController extends Controller
                 'description'=>$request->description ?? null,
                 ]);
             $token = $user->createToken('auth_token')->plainTextToken;
+            DB::commit();
             return response()->json([
                 'message'=>'client enregistré avec succés',
                 'client'=>new ClientRessource($client),
