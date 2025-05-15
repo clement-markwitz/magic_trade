@@ -46,4 +46,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function client(){
+        return $this->belongsTo(Client::class);
+    }
+    public function userCards(){
+        return $this->hasMany(UserCard::class);
+    }
+    public function userOneTrades(){
+        return $this->hasMany(Trade::class);
+    }
+    public function userTwoTrades(){
+        return $this->hasMany(Trade::class);
+    }
 }

@@ -15,4 +15,10 @@ class TradeItem extends Model
     public function userCard(){
         return $this->belongsTo(UserCard::class,'user_id');
     }
+    public function toUser(){
+        return $this->belongsTo(User::class,'to_user_id');
+    }
+    public function fromUser(){
+        return $this->userCard->user;
+    }
 }
