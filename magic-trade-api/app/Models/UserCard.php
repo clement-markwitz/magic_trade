@@ -45,10 +45,8 @@ class UserCard extends Model
         
         if ($this->finish=='foil') {
             return $card->price_usd_foil ?? null;
-        } elseif ($this->finish=='etched') {
-            return null;
-        } else {
-            return $card->price_usd;
         }
+        return $card->price_usd;
+        
     }
 }
