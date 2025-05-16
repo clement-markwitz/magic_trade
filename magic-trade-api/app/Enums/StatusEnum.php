@@ -5,6 +5,7 @@ namespace App\Enums;
 enum StatusEnum: string
 {
     case PENDING = 'pending';
+    case PROGRESS = 'progess';
     case ACCEPTED = 'accepted';
     case REJECTED = 'rejected';
     case COMPLETED = 'completed';
@@ -37,6 +38,7 @@ enum StatusEnum: string
     {
         return match($this) {
             self::PENDING => 'blue',
+            self::PROGRESS => 'orange',
             self::ACCEPTED => 'yellow',
             self::COMPLETED => 'green',
             self::REJECTED, self::CANCELLED => 'red',

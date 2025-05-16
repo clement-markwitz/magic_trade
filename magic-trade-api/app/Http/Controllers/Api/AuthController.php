@@ -119,11 +119,11 @@ class AuthController extends Controller
             ],401);
     }
     public function logout(Request $request)
-{
-    // Révoquer le token actuel
-    $request->user()->currentAccessToken()->delete();
+    {
+        // Révoquer le token actuel
+        $request->user()->currentAccessToken()->delete();
+        
+        return response()->json(['message' => 'Déconnecté avec succès']);
+    }
     
-    return response()->json(['message' => 'Déconnecté avec succès']);
-}
-
 }

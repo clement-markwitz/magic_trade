@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('trades', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_one')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('user_two')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_two')->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('status')->default(StatusEnum::PENDING->value);
             $table->timestamps();
             $table->timestamp('completed_at')->nullable();

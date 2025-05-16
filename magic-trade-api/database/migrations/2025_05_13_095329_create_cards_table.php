@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('set_code',100 );
             $table->string('collector_number', 10);
             $table->string('rarity', 20);
-            $table->text('image_uri')->nullable();
+            $table->string('image_uri')->nullable();
             $table->text('oracle_text')->nullable();
             $table->string('type_line', 100)->nullable();
             $table->string('mana_cost', 50)->nullable();

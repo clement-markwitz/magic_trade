@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('trade_id')->constrained('trades')->cascadeOnDelete();
             $table->foreignId('user_card_id')->constrained('user_cards')->cascadeOnDelete();
-            $table->foreignId('to_user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('to_user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

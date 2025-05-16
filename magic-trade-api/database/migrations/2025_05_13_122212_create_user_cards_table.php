@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->timestamps();
 
-            $table->unique(['user_id', 'card_id', 'finish'], 'user_card_finish');
+            $table->unique(['user_id', 'card_id', 'finish','etat'], 'user_card_finish');
             $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');
             $table->index(['user_id', 'for_trade','finish']);
         });
