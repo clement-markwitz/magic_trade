@@ -115,6 +115,14 @@ class CardController extends Controller
             'message'=> 'carte trouvée',
             'card'=>$card]);
         }
+    public function myCards(){
+        $userCards = UserCard::where('user_id', Auth::id())->get();
+        $cardIds = $userCards->pluck('card_id');
+        $cards = Card::whereIn('id', $cardIds)->get();
+        return response()->json([
+            'cards'=> $cards
+            ]);
+    }
     /**
      * Display the specified resource.
      */

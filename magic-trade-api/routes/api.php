@@ -15,6 +15,7 @@ Route::post('logout',[AuthController::class,'logout'])->middleware('auth:sanctum
 Route::prefix('cards')->group(function () {
     Route::get('',[CardController::class,'index']);
     Route::post('',[CardController::class,'store'])->middleware('auth:sanctum');
+    Route::get('my',[CardController::class,'myCards'])->middleware('auth:sanctum');
 });
 Route::prefix('trades')->group(function () {
     Route::get('',[TradeController::class,'index'])->middleware('auth:sanctum');
