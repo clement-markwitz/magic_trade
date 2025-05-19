@@ -47,7 +47,7 @@ class User extends Authenticatable
         ];
     }
     public function client(){
-        return $this->belongsTo(Client::class);
+        return $this->HasOne(Client::class, 'user_id', 'id');
     }
     public function userCards(){
         return $this->hasMany(UserCard::class);

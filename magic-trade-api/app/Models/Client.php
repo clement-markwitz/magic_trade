@@ -11,6 +11,6 @@ class Client extends Model
         'user_id','name','last_name','email','pseudo','contry','city','street','postal_code','phone','description'
     ];
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id', 'id');
     }
 }

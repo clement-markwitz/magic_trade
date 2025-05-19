@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CardController;
+use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\TradeController;
 use App\Http\Controllers\Api\TradeItemController;
 use Illuminate\Http\Request;
@@ -16,9 +17,12 @@ Route::prefix('cards')->group(function () {
     Route::post('',[CardController::class,'store'])->middleware('auth:sanctum');
 });
 Route::prefix('trades')->group(function () {
-    Route::get('',[TradeController::class,'index'])->middleware('auth:sanctum');;
+    Route::get('',[TradeController::class,'index'])->middleware('auth:sanctum');
     Route::post('',[TradeController::class,'store'])->middleware('auth:sanctum');
     Route::post('{id}',[TradeController::class,'show'])->middleware('auth:sanctum');
     Route::put('{id}',[TradeController::class,'update'])->middleware('auth:sanctum');
     Route::post('item',[TradeItemController::class,'store'])->middleware('auth:sanctum');
+});
+Route::prefix('clients')->group(function () {
+    Route::put('{id}',[ClientController::class,'update'])->middleware('auth:sanctum');
 });
