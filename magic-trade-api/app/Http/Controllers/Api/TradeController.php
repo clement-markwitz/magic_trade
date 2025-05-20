@@ -38,7 +38,10 @@ class TradeController extends Controller
             'trade'=>$trade
         ]);
     }
-
+    public function myTrades(Request $request){
+        $trades=Trade::where('user_one',Auth::user()->id)->orWhere('user_two',Auth::user()->id)->get();
+        return response()->json($trades);
+    }
     /**
      * Display the specified resource.
      */
@@ -46,7 +49,7 @@ class TradeController extends Controller
     {
         $trade= Trade::findOrFail($id);
         return response()->json(['trade'=>$trade,
-    'tradeItem'=>$trade->items ?? null]);
+        'tradeItem'=>$trade->items ?? null]);
     }
 
     /**

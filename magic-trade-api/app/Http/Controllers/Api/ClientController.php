@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use App\Models\User;
+use Log;
 class ClientController extends Controller
 {
     /**
@@ -29,7 +30,8 @@ class ClientController extends Controller
         return response()->json($client);
     }
     public function me(){
-        $client=Client::find(Auth::user()->id);
+        Log::info(Auth::user()->client->id);
+        $client=Client::find(Auth::user());
         return response()->json($client);
     }
     /**

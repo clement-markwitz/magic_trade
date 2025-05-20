@@ -95,6 +95,7 @@ class CardController extends Controller
             $user_card=UserCard::create([
                 'user_id'=>Auth::user()->id,
                 'card_id'=>$request->scryfall_id,
+                'image'=>$cardApi['image_uris']['normal'] ?? null,
                 'finish'=>$request->finish,
                 'etat'=>$request->etat,
                 'acquired_date'=>$request->acquired_date ?? null,
