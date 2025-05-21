@@ -13,10 +13,10 @@ class TradeItem extends Model
         return $this->belongsTo(Trade::class,'trade_id');
     }
     public function userCard(){
-        return $this->belongsTo(UserCard::class,'user_id');
+        return $this->belongsTo(UserCard::class,'user_card_id','id');
     }
     public function toUser(){
-        return $this->belongsTo(User::class,'to_user_id');
+        return $this->belongsTo(User::class,'to_user_id','id');
     }
     public function fromUser(){
         return $this->userCard->user;

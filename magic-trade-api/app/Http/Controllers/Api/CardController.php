@@ -78,7 +78,11 @@ class CardController extends Controller
                 'border_color'=>$cardApi['border_color'] ?? null,
                 'artist'=> $cardApi['artist'] ?? null,
             ]);
+        }else{
+            $card=Card::where('id', $request->scryfall_id)->first();
+    
         }
+        
 
         $existingCard = UserCard::where([
             'user_id' => Auth::id(),
@@ -92,10 +96,11 @@ class CardController extends Controller
             $existingCard->save();
             $user_card=$existingCard;
         } else {
+
             $user_card=UserCard::create([
                 'user_id'=>Auth::user()->id,
                 'card_id'=>$request->scryfall_id,
-                'image'=>$cardApi['image_uris']['normal'] ?? null,
+                'image'=>$card->image_uri,
                 'finish'=>$request->finish,
                 'etat'=>$request->etat,
                 'acquired_date'=>$request->acquired_date ?? null,
@@ -105,7 +110,7 @@ class CardController extends Controller
         return response()->json([
             'message'=>"carte ajouté avec succés",
             'user_card'=>$user_card,
-            'carte'=>$card ?? Card::where('id', $request->scryfall_id)->first(),
+            'carte'=>$card ?? Card::where('id', $request->scryfall_id)->get(),
         ]);
         //TODO traiter le cas ou la carte n'existe pas et aussi le cas ou 
 

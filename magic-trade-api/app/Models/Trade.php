@@ -11,12 +11,16 @@ class Trade extends Model
     protected $fillable = [
         'user_one',
         'user_two',
+        'user_one_accept',
+        'user_two_accept',
         'status',
         'completed_at'
     ];
     
     protected $casts = [
         'status' => StatusEnum::class,
+        'user_one_accept'=>'boolean',
+        'user_two_accept'=>'boolean',
         'completed_at' => 'datetime'
     ];
     

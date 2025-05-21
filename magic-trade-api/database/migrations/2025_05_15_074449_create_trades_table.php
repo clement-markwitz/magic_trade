@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_one')->constrained('users')->cascadeOnDelete();
             $table->foreignId('user_two')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->boolean('user_one_accept')->default(false);
+            $table->boolean('user_two_accept')->default(false);
             $table->string('status')->default(StatusEnum::PENDING->value);
             $table->timestamps();
             $table->timestamp('completed_at')->nullable();

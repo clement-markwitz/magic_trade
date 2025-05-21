@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('card_id', 40);
-            $table->string('image',200);
+            $table->string('image')->nullable();
             $table->string('finish', 20);
             $table->integer('quantity')->default(1);
             $table->boolean('trade')->default(false);
