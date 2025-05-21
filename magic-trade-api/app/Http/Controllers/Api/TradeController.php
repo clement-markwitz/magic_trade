@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
+use App\Jobs\CompleteTradeJob;
 use App\Models\Trade;
+use App\Models\TradeItem;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
+use Log;
 
 class TradeController extends Controller
 {
@@ -84,7 +87,8 @@ class TradeController extends Controller
             DB::commit();
             return response()->json([
             'message'=> 'bien mise a jour ',
-            'trade'=>$trade->fresh()->items
+            'trade'=>$trade,
+            'tradeItem'=>$trade->fresh()->items
             ],200);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -93,7 +97,71 @@ class TradeController extends Controller
                 ],400);
         }
     }
+    public function leave(string $id){
+        $trade=Trade::findOrFail($id);
+        if (!$trade->status == StatusEnum::PROGRESS->value) {
+            return response()->json([
+                'error'=> 'le trade est deja accepté ou pas rejoin']);
+        }
+        DB::beginTransaction();
+        try {
+            $trade->update([
+                'user_two'=>null,
+                'status'=>StatusEnum::PENDING->value
+                ]);
+            $items=$trade->items;
+            for ($i= 0; $i < count($items); $i++) {
+                if($items[$i]->userCard->user_id==Auth::user()->id){
+                    TradeItem::where('id',$items[$i]->id)->delete();
+                }
+                else{
+                    $items[$i]->to_user_id=null;
+                    $items[$i]->save();
+                }
+            }
+            DB::commit();
+            return response()->json([
+                'message'=> 'trade quitté avec succes',
+                'tradeItem'=>$trade->fresh()->items,
+                'trade'=>$trade->fresh()]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'error'=> $e->getMessage()
+                ],400);
+        }
+    }
+    public function accept(string $id){
+        $trade=Trade::findOrFail($id);
+        if (!$trade->status == StatusEnum::PROGRESS->value) {
+            return response()->json([
+                'error'=> 'pas possible d\accepter']);
+        }
+        $user_id=Auth::user()->id;
+        if($trade->user_one==$user_id){
+            $trade->user_one==true;
+            $trade->save();
+        }
+        elseif($trade->user_two==$user_id){
+            $trade->user_one==true;
+            $trade->save();
+        }
+        else{
+            return response()->json([
+                'error'=> 'vous ne faites pas partie du trade'
+            ]);
+        }
+        if($trade->fresh()->user_one_accept== true && $trade->user_two_accept==true){
+            $trade->status=StatusEnum::ACCEPTED;
+            $trade->completed_at=now();
 
+            CompleteTradeJob::dispatch($trade->id)->delay(now()->addSeconds(10));
+        }
+        $trade->save();
+        return response()->json([
+            'status'=>$trade->status]);
+    }
+    //TODO cancel trade
     /**
      * Remove the specified resource from storage.
      */
