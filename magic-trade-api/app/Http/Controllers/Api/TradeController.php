@@ -139,11 +139,11 @@ class TradeController extends Controller
         }
         $user_id=Auth::user()->id;
         if($trade->user_one==$user_id){
-            $trade->user_one==true;
+            $trade->user_one_accept=true;
             $trade->save();
         }
         elseif($trade->user_two==$user_id){
-            $trade->user_one==true;
+            $trade->user_one=true;
             $trade->save();
         }
         else{
@@ -159,7 +159,8 @@ class TradeController extends Controller
         }
         $trade->save();
         return response()->json([
-            'status'=>$trade->status]);
+            'status'=>$trade->status,
+        'trade'=>$trade->fresh()]);
     }
     //TODO cancel trade
     /**
