@@ -143,7 +143,7 @@ class TradeController extends Controller
             $trade->save();
         }
         elseif($trade->user_two==$user_id){
-            $trade->user_one=true;
+            $trade->user_two_accept=true;
             $trade->save();
         }
         else{
@@ -152,7 +152,7 @@ class TradeController extends Controller
             ]);
         }
         if($trade->fresh()->user_one_accept== true && $trade->user_two_accept==true){
-            $trade->status=StatusEnum::ACCEPTED;
+            $trade->status=StatusEnum::ACCEPTED->value;
             $trade->completed_at=now();
 
             CompleteTradeJob::dispatch($trade->id)->delay(now()->addSeconds(10));
@@ -160,7 +160,7 @@ class TradeController extends Controller
         $trade->save();
         return response()->json([
             'status'=>$trade->status,
-        'trade'=>$trade->fresh()]);
+            'trade'=>$trade->fresh()]);
     }
     //TODO cancel trade
     /**

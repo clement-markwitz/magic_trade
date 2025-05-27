@@ -8,6 +8,7 @@ use App\Models\UserCard;
 use App\Services\ScryfallService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Log;
 class CardController extends Controller
 {
     protected $scryfallService ;

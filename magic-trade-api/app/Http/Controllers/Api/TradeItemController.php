@@ -7,6 +7,7 @@ use App\Models\TradeItem;
 use App\Models\Trade;
 use Auth;
 use Illuminate\Http\Request;
+use Log;
 
 class TradeItemController extends Controller
 {
@@ -43,7 +44,15 @@ class TradeItemController extends Controller
             'to_user_id'=>$trade->user_one ?? null
             ]);
         }
-        
+        $userCard=$item->userCard;
+        if($userCard->quantity== 0){
+            return response()->json([
+                'message'=> 'vous n\'avez plus cette carte',
+            ]);
+        }
+        Log::info($userCard->quantity);
+        $userCard->quantity=$userCard->quantity-1;
+        $userCard->save();
         return response()->json([
             'message'=>'carte ajoutée avec succes',
             'tradeItem'=>$item

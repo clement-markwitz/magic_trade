@@ -33,6 +33,7 @@ Route::prefix('trades')->group(function () {
     Route::post('',[TradeController::class,'store'])->middleware(['auth:sanctum','permission:create trade']);
     Route::post('item',[TradeItemController::class,'store'])->middleware(['auth:sanctum','permission:create trade item']);
     Route::post('leave/{id}',[TradeController::class,'leave'])->middleware(['auth:sanctum','permission:leave trade']);
+    Route::post('accept/{id}',[TradeController::class,'accept'])->middleware(['auth:sanctum','permission:accept trade']);
     Route::post('{id}',[TradeController::class,'show'])->middleware(['auth:sanctum','permission:show trade']);
     Route::put('{id}',[TradeController::class,'update'])->middleware(['auth:sanctum','permission:update trade']);
 });
