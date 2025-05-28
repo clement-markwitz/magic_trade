@@ -1,0 +1,686 @@
+{
+  "name": "site carte",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "trades",
+      "filename": "trades",
+      "seq": 3,
+      "root": {
+        "meta": {
+          "name": "trades",
+          "seq": 3
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "accept",
+          "filename": "accept.bru",
+          "seq": 5,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/trades/accept/1",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "creer",
+          "filename": "creer.bru",
+          "seq": 1,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/trades",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "item",
+          "filename": "item.bru",
+          "seq": 2,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/trades/item",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"trade_id\":\"1\",\n  \"user_card_id\":\"3\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "leave",
+          "filename": "leave.bru",
+          "seq": 4,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/trades/leave/2",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "filename": "update.bru",
+          "seq": 3,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/trades/1",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "clients",
+      "filename": "clients",
+      "seq": 4,
+      "root": {
+        "meta": {
+          "name": "clients",
+          "seq": 4
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "liste",
+          "filename": "liste.bru",
+          "seq": 1,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/clients",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "me",
+          "filename": "me.bru",
+          "seq": 2,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/clients/me",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "show",
+          "filename": "show.bru",
+          "seq": 3,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/clients/1",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "userCards",
+      "filename": "userCards",
+      "seq": 5,
+      "root": {
+        "meta": {
+          "name": "userCards",
+          "seq": 5
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "index",
+          "filename": "index.bru",
+          "seq": 1,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/userCards",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "cards",
+      "filename": "cards",
+      "seq": 2,
+      "root": {
+        "meta": {
+          "name": "cards",
+          "seq": 2
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "index",
+          "filename": "index.bru",
+          "seq": 1,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/cards",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "mycards",
+          "filename": "mycards.bru",
+          "seq": 2,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/cards/my",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "folder",
+          "name": "add card",
+          "filename": "add card",
+          "seq": 3,
+          "root": {
+            "meta": {
+              "name": "add card",
+              "seq": 3
+            }
+          },
+          "items": [
+            {
+              "type": "http",
+              "name": "store 2",
+              "filename": "store 2.bru",
+              "seq": 2,
+              "request": {
+                "url": "http://127.0.0.1:8000/api/cards",
+                "method": "POST",
+                "headers": [],
+                "params": [],
+                "body": {
+                  "mode": "json",
+                  "json": "{\n  \"scryfall_id\":\"d5017dbc-07fd-45ea-9629-7c584144e8be\",\n  \"finish\":\"nonfoil\",\n  \"etat\":\"neuf\"\n}",
+                  "formUrlEncoded": [],
+                  "multipartForm": [],
+                  "file": []
+                },
+                "script": {},
+                "vars": {},
+                "assertions": [],
+                "tests": "",
+                "docs": "",
+                "auth": {
+                  "mode": "inherit"
+                }
+              }
+            },
+            {
+              "type": "http",
+              "name": "store 3",
+              "filename": "store 3.bru",
+              "seq": 3,
+              "request": {
+                "url": "http://127.0.0.1:8000/api/cards",
+                "method": "POST",
+                "headers": [],
+                "params": [],
+                "body": {
+                  "mode": "json",
+                  "json": "{\n  \"scryfall_id\":\"2c9942a2-11d2-403b-89c6-35c23ac9e9da\",\n  \"finish\":\"nonfoil\",\n  \"etat\":\"neuf\"\n}",
+                  "formUrlEncoded": [],
+                  "multipartForm": [],
+                  "file": []
+                },
+                "script": {},
+                "vars": {},
+                "assertions": [],
+                "tests": "",
+                "docs": "",
+                "auth": {
+                  "mode": "inherit"
+                }
+              }
+            },
+            {
+              "type": "http",
+              "name": "store 4",
+              "filename": "store 4.bru",
+              "seq": 4,
+              "request": {
+                "url": "http://127.0.0.1:8000/api/cards",
+                "method": "POST",
+                "headers": [],
+                "params": [],
+                "body": {
+                  "mode": "json",
+                  "json": "{\n  \"scryfall_id\":\"ef3e7352-5768-4d4e-befb-560b9d10a178\",\n  \"finish\":\"nonfoil\",\n  \"etat\":\"neuf\"\n}",
+                  "formUrlEncoded": [],
+                  "multipartForm": [],
+                  "file": []
+                },
+                "script": {},
+                "vars": {},
+                "assertions": [],
+                "tests": "",
+                "docs": "",
+                "auth": {
+                  "mode": "inherit"
+                }
+              }
+            },
+            {
+              "type": "http",
+              "name": "store",
+              "filename": "store.bru",
+              "seq": 1,
+              "request": {
+                "url": "http://127.0.0.1:8000/api/cards",
+                "method": "POST",
+                "headers": [],
+                "params": [],
+                "body": {
+                  "mode": "json",
+                  "json": "{\n  \"scryfall_id\":\"4a05ab2e-22c4-4022-9514-11aa7e041027\",\n  \"finish\":\"nonfoil\",\n  \"etat\":\"neuf\"\n}",
+                  "formUrlEncoded": [],
+                  "multipartForm": [],
+                  "file": []
+                },
+                "script": {},
+                "vars": {},
+                "assertions": [],
+                "tests": "",
+                "docs": "",
+                "auth": {
+                  "mode": "inherit"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "auth",
+      "filename": "auth",
+      "seq": 1,
+      "root": {
+        "meta": {
+          "name": "auth",
+          "seq": 1
+        }
+      },
+      "items": [
+        {
+          "type": "http",
+          "name": "login copy",
+          "filename": "login copy.bru",
+          "seq": 4,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\":\"jean.dupont@lexample.com\",\n  \"password\":\"P@ssw0rd2023!\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": " test(\"Status devrait être 200\", function() {\n    expect(res.status).to.equal(200);\n  });\n  \n  // Vérifier que le corps contient un token\n  test(\"Réponse contient un token\", function() {\n    expect(res.body).to.have.property('token');\n  });\n  \n  // Stocker le token pour les futures requêtes\n  bru.setEnvVar(\"AUTH_TOKEN\", res.body.token);",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "login",
+          "filename": "login.bru",
+          "seq": 3,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\":\"clem.markwitz@gmail.com\",\n  \"password\":\"P@ssw0rd2023!\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": " test(\"Status devrait être 200\", function() {\n    expect(res.status).to.equal(200);\n  });\n  \n  // Vérifier que le corps contient un token\n  test(\"Réponse contient un token\", function() {\n    expect(res.body).to.have.property('token');\n  });\n  \n  // Stocker le token pour les futures requêtes\n  bru.setEnvVar(\"AUTH_TOKEN\", res.body.token);",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "logout",
+          "filename": "logout.bru",
+          "seq": 5,
+          "request": {
+            "url": "{{Base_url}}api/logout",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "test(\"code est 200\", function (){\n  expect(res.status).to.equal(200)\n});",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "register user 2",
+          "filename": "register user 2.bru",
+          "seq": 2,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"clement\",\n  \"last_name\": \"markwitz\",\n  \"pseudo\": \"Gobelin62xc\",\n  \"contry\": \"France\",\n  \"city\": \"Beuvry\",\n  \"street\": \"123 Avenue des Champs-Élysées\",\n  \"postal_code\": \"62660\",\n  \"phone\": \"0612345678\",\n  \"description\": \"Je suis un développeur web passionné par Laravel et les nouvelles technologies.\",\n  \"email\": \"clem.markwitz@gmail.com\",\n  \"email_confirmation\": \"clem.markwitz@gmail.com\",\n  \"password\": \"P@ssw0rd2023!\",\n  \"password_confirmation\": \"P@ssw0rd2023!\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "register",
+          "filename": "register.bru",
+          "seq": 1,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"Jean\",\n  \"last_name\": \"Dupont\",\n  \"pseudo\": \"jeanlD42\",\n  \"contry\": \"France\",\n  \"city\": \"Paris\",\n  \"street\": \"123 Avenue des Champs-Élysées\",\n  \"postal_code\": \"75008\",\n  \"phone\": \"0612345678\",\n  \"description\": \"Je suis un développeur web passionné par Laravel et les nouvelles technologies.\",\n  \"email\": \"jean.dupont@lexample.com\",\n  \"email_confirmation\": \"jean.dupont@lexample.com\",\n  \"password\": \"P@ssw0rd2023!\",\n  \"password_confirmation\": \"P@ssw0rd2023!\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": " test(\"Status devrait être 200\", function() {\n    expect(res.status).to.equal(200);\n  });\n  \n  // Vérifier que le corps contient un token\n  test(\"Réponse contient un token\", function() {\n    expect(res.body).to.have.property('token');\n  });\n  \n  // Stocker le token pour les futures requêtes\n  bru.setEnvVar(\"AUTH_TOKEN\", res.body.token);",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "filename": "update.bru",
+          "seq": 6,
+          "request": {
+            "url": "http://127.0.0.1:8000/api/clients/1",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"current_password\":\"P@ssw0rd2023!\",\n  \"name\": \"Je\",\n  \"last_name\": \"Dupo\",\n  \"postal_code\": \"75002\",\n  \"phone\": \"0612345680\",\n  \"description\": \"Je suis un développeur web passionné par Laravel et les nouvelles technologies.\",\n  \"email\":\"j.d@j.com\",\n  \"password\": \"P@ssw0rd202.\",\n  \"password_confirmation\": \"P@ssw0rd202.\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": [],
+              "file": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "inherit"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "llWmUXbjSHIbCm4ixLlmG",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "Base_url",
+          "value": "http://127.0.0.1:8000/",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "magic trade"
+    }
+  ],
+  "root": {
+    "request": {
+      "auth": {
+        "mode": "bearer",
+        "bearer": {
+          "token": "{{AUTH_TOKEN}}"
+        }
+      }
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "site carte",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.0060443878173828125,
+    "filesCount": 29,
+    "presets": {
+      "requestType": "http",
+      "requestUrl": "http://127.0.0.1:8000/"
+    }
+  }
+}
