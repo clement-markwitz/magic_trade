@@ -18,7 +18,27 @@ class UserCard extends Model
     public function card() {
         return $this->belongsTo(Card::class);
     }
-
+    public function tradeItems(){
+        return $this->hasMany(TradeItem::class);
+    }
+    /**
+     * permet de savoir si elle est dans un trade
+     */
+    public function haveTradeItem(){
+        if ($this->tradeItems()->count() > 0){
+            $this->trade=true;
+            return true;
+        }
+        $this->trade=false;
+        return false;
+    }
+    /**
+     * return combien de trade a cette carte
+     * @return int
+     */
+    public function ManyInTrade(){
+        return $this->tradeItems()->count();
+    }
     /**
      * Portée de requête pour les cartes disponibles à l'échange.
      */

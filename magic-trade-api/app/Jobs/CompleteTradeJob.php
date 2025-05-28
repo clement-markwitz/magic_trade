@@ -51,7 +51,7 @@ class CompleteTradeJob implements ShouldQueue
                         'card_id'=>$userCard->card_id,
                         'image'=>$userCard->image ?? null,
                         'finish'=>$userCard->finish,
-                        'trade'=>true,
+                        'trade'=>false,
                         'etat'=>$userCard->etat,
                         'acquired_date'=>now(),
                         'notes'=>$userCard->notes ?? null,

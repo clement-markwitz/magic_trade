@@ -56,17 +56,6 @@ class Trade extends Model
         return !$this->status->isTerminal();
     }
     
-    // Méthode pour compléter un échange
-    public function complete(): void
-    {
-        if (!$this->isPending()) {
-            throw new \Exception("Seuls les échanges en attente peuvent être complétés");
-        }
-        
-        $this->status = StatusEnum::COMPLETED;
-        $this->completed_at = now();
-        $this->save();
-    }
     
     // Méthode pour rejeter un échange
     public function reject(): void

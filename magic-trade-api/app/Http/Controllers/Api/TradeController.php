@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\CompleteTradeJob;
 use App\Models\Trade;
 use App\Models\TradeItem;
+use App\Models\UserCard;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -112,7 +113,12 @@ class TradeController extends Controller
             $items=$trade->items;
             for ($i= 0; $i < count($items); $i++) {
                 if($items[$i]->userCard->user_id==Auth::user()->id){
+                    $userCard=$items[$i]->userCard;
                     TradeItem::where('id',$items[$i]->id)->delete();
+                    $userCard->quantity=$userCard->quantity+1;
+                    $userCard->haveTradeItem();
+                    $userCard->save();
+
                 }
                 else{
                     $items[$i]->to_user_id=null;
@@ -163,11 +169,29 @@ class TradeController extends Controller
             'trade'=>$trade->fresh()]);
     }
     //TODO cancel trade
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function leaveCreator(string $id)
     {
-        //
+        $trade=Trade::findOrFail($id);
+        if ($trade->status->value == StatusEnum::COMPLETED->value or $trade->status->value == StatusEnum::ACCEPTED->value or !$trade->user_one==Auth::user()->id) {
+            return response()->json([
+                'impossible de supprimer ce trade'
+            ]);
+        }
+        $items=$trade->items;
+        foreach ($items as $item) {
+            $userCard=$item->userCard;
+            $item->delete();
+            $userCard->quantity++;
+            $userCard->haveTradeItem();
+            $userCard->save();
+        }
+        $trade->delete();
+        return response()->json([   
+            'message'=>'trade supprimé avec succes'
+        ]);
     }
 }

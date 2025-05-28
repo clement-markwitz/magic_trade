@@ -52,6 +52,7 @@ class TradeItemController extends Controller
         }
         Log::info($userCard->quantity);
         $userCard->quantity=$userCard->quantity-1;
+        $userCard->trade=true;
         $userCard->save();
         return response()->json([
             'message'=>'carte ajoutée avec succes',

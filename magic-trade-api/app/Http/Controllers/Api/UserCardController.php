@@ -32,8 +32,28 @@ class UserCardController extends Controller
         $userCard->update($request->all());
         return response()->json(['success'=> 'carte mise a jour','userCard'=>$userCard->fresh()]);
     }
+    /**
+     * supprime une quantité de cette carte
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse|mixed
+     */
+    public function removeOne(int $id){
+        $userCard = UserCard::find($id);
+        if ($userCard->quantity==0){
+            return response()->json([
+                'message'=> 'impossible de supprimer car plus d\'exemplaire'
+                ]);
+        }
+        $userCard->quantity=$userCard->quantity-1;
+        return response()->json([
+            'message'=> 'une quantité supprimé']);
+    }
     public function destroy(int $id){
         $userCard = UserCard::find($id);
+        if( $userCard->trade==true){
+            return response()->json([
+                'message'=> 'la carte est en trade impossible de supprimer']);
+        }
         $userCard->delete();
         return response()->json(['success'=> 'carte supprimer de l`\'invetaire']);
     }
