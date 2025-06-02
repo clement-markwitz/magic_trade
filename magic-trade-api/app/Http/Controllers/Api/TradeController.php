@@ -100,6 +100,25 @@ class TradeController extends Controller
     }
     public function leave(string $id){
         $trade=Trade::findOrFail($id);
+        if($trade->user_one==Auth::id()){
+            if(!$trade->status==StatusEnum::ACCEPTED->value){
+                return response()->json([
+                    'message'=>'impossible le trade n\'ai pas accepté',
+                ]);
+            }
+            if($trade->user_one==Auth::id()){
+                $trade->user_one_accept=false;
+            }
+            else{
+                $trade->user_two_accept=false;
+            }
+            $trade->status=StatusEnum::PROGRESS->value;
+            $trade->save();
+            return response()->json([
+                'message'=>'trade annulé',
+                'trade'=>$trade
+            ]);
+        }
         if (!$trade->status == StatusEnum::PROGRESS->value) {
             return response()->json([
                 'error'=> 'le trade est deja accepté ou pas rejoin']);
@@ -168,15 +187,14 @@ class TradeController extends Controller
             'status'=>$trade->status,
             'trade'=>$trade->fresh()]);
     }
-    //TODO cancel trade
 
     /**
      * Remove the specified resource from storage.
      */
-    public function leaveCreator(string $id)
+    public function leaveCreator( $id)
     {
         $trade=Trade::findOrFail($id);
-        if ($trade->status->value == StatusEnum::COMPLETED->value or $trade->status->value == StatusEnum::ACCEPTED->value or !$trade->user_one==Auth::user()->id) {
+        if ($trade->status == StatusEnum::COMPLETED->value or $trade->status == StatusEnum::ACCEPTED->value or !$trade->user_one==Auth::user()->id) {
             return response()->json([
                 'impossible de supprimer ce trade'
             ]);

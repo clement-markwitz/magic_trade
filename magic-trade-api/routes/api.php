@@ -31,9 +31,11 @@ Route::prefix('userCards')->group(function () {
 Route::prefix('trades')->group(function () {
     Route::get('',[TradeController::class,'index'])->middleware(['auth:sanctum','permission:list trades']);
     Route::post('',[TradeController::class,'store'])->middleware(['auth:sanctum','permission:create trade']);
+    Route::get('my',[TradeController::class,'myTrades'])->middleware(['auth:sanctum','permission:my trades']);
     Route::post('item',[TradeItemController::class,'store'])->middleware(['auth:sanctum','permission:create trade item']);
     Route::post('leave/{id}',[TradeController::class,'leave'])->middleware(['auth:sanctum','permission:leave trade']);
     Route::post('accept/{id}',[TradeController::class,'accept'])->middleware(['auth:sanctum','permission:accept trade']);
+    Route::post('cancel/{id}',[TradeController::class,'cancelTrade'])->middleware(['auth:sanctum','permission:cancel trade']);
     Route::post('{id}',[TradeController::class,'show'])->middleware(['auth:sanctum','permission:show trade']);
     Route::put('{id}',[TradeController::class,'update'])->middleware(['auth:sanctum','permission:update trade']);
 });
