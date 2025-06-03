@@ -12,6 +12,8 @@ class Trade extends Model
         'user_one',
         'user_two',
         'user_one_accept',
+        'user_one_trades',
+        'user_two_accept',
         'user_two_accept',
         'status',
         'completed_at'
@@ -21,6 +23,8 @@ class Trade extends Model
         'status' => StatusEnum::class,
         'user_one_accept'=>'boolean',
         'user_two_accept'=>'boolean',
+        'user_one_trades'=>'boolean',
+        'user_two_trades'=>'boolean',
         'completed_at' => 'datetime'
     ];
     
@@ -54,6 +58,21 @@ class Trade extends Model
     public function canBeCancelled(): bool
     {
         return !$this->status->isTerminal();
+    }
+    public function cancel($id){
+        $isUserOne = ($this->user_one == $id);
+        $tradeAttribute = $isUserOne ? 'user_one_trades' : 'user_two_trades';
+        $acceptAttribute = $isUserOne ? 'user_one_accept' : 'user_two_accept';
+        
+        if ($this->$tradeAttribute == true) {
+            $this->$tradeAttribute = false;
+            $this->status = StatusEnum::ACCEPTED->value;
+        } else {
+            $this->$acceptAttribute = false;
+            $this->status = StatusEnum::PROGRESS->value;
+        }
+        $this->save();
+
     }
     
     

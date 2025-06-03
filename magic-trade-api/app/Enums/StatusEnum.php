@@ -9,6 +9,7 @@ enum StatusEnum: string
     case ACCEPTED = 'accepted';
     case REJECTED = 'rejected';
     case COMPLETED = 'completed';
+    case FINISH = 'finish';
     case CANCELLED = 'cancelled';
     
     /**

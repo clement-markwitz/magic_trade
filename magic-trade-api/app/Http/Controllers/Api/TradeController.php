@@ -7,11 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Jobs\CompleteTradeJob;
 use App\Models\Trade;
 use App\Models\TradeItem;
-use App\Models\UserCard;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
-use Log;
 
 class TradeController extends Controller
 {
@@ -178,16 +176,56 @@ class TradeController extends Controller
         }
         if($trade->fresh()->user_one_accept== true && $trade->user_two_accept==true){
             $trade->status=StatusEnum::ACCEPTED->value;
-            $trade->completed_at=now();
-
-            CompleteTradeJob::dispatch($trade->id)->delay(now()->addSeconds(10));
         }
         $trade->save();
         return response()->json([
             'status'=>$trade->status,
             'trade'=>$trade->fresh()]);
     }
-
+    public function complete($id){
+        $trade=TRADE::findOrFail($id);
+        if($trade->status!=StatusEnum::ACCEPTED->value){
+            return response()->json([
+                'message'=>'le trade n\'ai pas accepter'
+            ]);
+        }
+        if($trade->user_one==Auth::id()){
+            $trade->user_one_trades=true;
+            $trade->save();
+        }
+        else{
+            $trade->user_two_trades=true;
+            $trade->save();
+        }
+        if($trade->user_one_trades==true && $trade->user_two_trades==true){
+            $trade->completed_at=now();
+            $trade->status=StatusEnum::COMPLETED->value;
+            CompleteTradeJob::dispatch($trade->id)->delay(now()->addSeconds(10));
+            $trade->save();
+            return response()->json([
+                'message'=>'vous avez fini votre échange',
+                'trade'=>$trade->fresh()
+            ]);
+        }
+        return response()->json([
+            'message'=>'vous avez echanger vos/votre carte/s',
+            'trade'=>$trade->fresh()
+        ]);
+    }
+    public function cancelTrade($id)
+    {
+        $trade=TRADE::findOrFail($id);
+        if($trade->status!=StatusEnum::ACCEPTED->value || $trade->status!=StatusEnum::COMPLETED->value  ){
+            return response()->json([
+                'message'=>'impossible de cancel'
+            ]);
+        }
+        $trade->cancel(Auth::id());
+        return response()->json([
+            'message'=>'annulé avec succes',
+            'trade'=>$trade,
+        ]);
+    }    
     /**
      * Remove the specified resource from storage.
      */

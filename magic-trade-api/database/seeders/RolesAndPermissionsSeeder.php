@@ -36,6 +36,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name'=> 'delete trade']);
         Permission::create(['name'=> 'leave trade']);
         Permission::create(['name'=> 'accept trade']);
+        Permission::create(['name'=> 'complete trade']);
         Permission::create(['name'=> 'cancel trade']);
         Permission::create(['name'=> 'list trade items']);
         Permission::create(['name'=> 'create trade item']);
@@ -45,6 +46,6 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::create(['name'=> 'admin'])->givePermissionTo(Permission::all());
         Role::create(['name'=> 'client'])->givePermissionTo(['me','add card','show card',
     'my cards','show by user card','update card','delete card','update user card','delete user card','update client','list trades','my trades','create trade','show trade','update trade',
-'delete trade','leave trade','accept trade','cancel trade','list trade items','create trade item','update trade item','delete trade item']);
+'delete trade','leave trade','accept trade','complete trade','cancel trade','list trade items','create trade item','update trade item','delete trade item']);
     }
 }

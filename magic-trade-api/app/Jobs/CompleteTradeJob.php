@@ -30,8 +30,8 @@ class CompleteTradeJob implements ShouldQueue
     public function handle(): void
     {
         $trade = Trade::findOrFail($this->tradeId); 
-        if($trade->status->value == StatusEnum::ACCEPTED->value) {
-            $trade->status = StatusEnum::COMPLETED;
+        if($trade->status == StatusEnum::COMPLETED->value) {
+            $trade->status = StatusEnum::FINISH;
             $trade->save();
             $items=$trade->items;
             foreach($items as $item) {
@@ -60,7 +60,7 @@ class CompleteTradeJob implements ShouldQueue
                 $item->delete();
             }
         } else {
-            Log::info("Status not changed because it's not ACCEPTED");
+            Log::info("Status not changed because it's not completed");
         }
     }
 }
